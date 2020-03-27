@@ -1,0 +1,595 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{float}
+\usepackage{amsthm} %Para demostrar
+\usepackage{natbib}
+\usepackage[spanish]{babel}
+\newtheorem{proposition}{Proposici\'on.}
+\newtheorem{definition}{Definici\'on.}
+\newtheorem{corolary}{Corolario.}
+\newtheorem{theorem}{Teorema}
+\newtheorem{lemma}{Lema}
+\newtheorem{example}{Ejemplo.}
+\newtheorem{conjeture}{Conjeture.}
+\newcommand{\gal}{ \mathop{Gal}}
+\usepackage[all]{xy}
+
+%COMANDOS
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\Ima}{\operatorname{Im}}
+\newcommand{\mfF}{\mathfrak{U}}
+\newcommand{\mfg}{\mathfrak{g}}
+
+\newcommand{\suchthat}{\mid}
+\newcommand{\tr}{\mathop{Tr}}
+\providecommand{\abs}[1]{\lvert#1\rvert}
+
+\newcommand{\Rad}{\mathop{Rad}}
+\newcommand{\End}{\mathop{End}}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+\author{ Hector Giovanny Mora Díaz\\
+\small Universidad de los Andes\\
+\small Departamento de Matemáticas\\}
+
+\title{Master thesis draft}
+
+
+
+
+
+\begin{document}
+\maketitle
+\section{Álgebras de Lie }
+
+
+ \begin{definition} Un \textbf{álgebra de Lie} es un espacio vectorial complejo $\mathfrak{g}$ (de dimensión finita a menos de que se indique lo contrario) equipado con un mapa bilineal $[\cdot, \cdot]: \mathfrak{g}\times \mathfrak{g}\rightarrow \mathfrak{g}$ (denominado corchete) que satisface: 
+ \begin{enumerate}
+     \item $[x,y]=-[y,x]$ (Es antinsimétrica).
+     \item $[x,[y,z]]+[y,[z,x] +[z, [x,y]]=0$ ( Identidad de Jacobi).
+ \end{enumerate}
+
+\end{definition}
+\begin{example}
+
+    Defina $$\mathfrak{gl}(V)=  \{ f: V\rightarrow V \suchthat f \mbox{es una transformación lineal} \} $$
+    junto con el corchete dado por el conmutador: $[f,g]= fg-gf$ para todo $f,g \in \mathfrak{gl}(V)$. Siendo $\dim(V)=n$, $\mathfrak{gl}(V)$ puede considerarse como el $\mathbb{C}$-espacio vectorial de matrices $n\times n$ y se denotará como $\mathfrak{gl}_n$
+
+\end{example}
+Dadas dos álgebras de Lie $L, L'$, $L$ y $L'$ son \textit{isomorfas}  si existe un isomorfismo $\phi:L \rightarrow L' $ de espacios vectoriales tal que $\phi([x,y])= [\phi(x), \phi(y)$ para todo $x,y \in L$.\\
+Una \textit{subálgebra} de Lie de un álgebra de Lie $L$ es un subespacio vectorial $K$ de $L$ tal que para todo $x,y\in K$, $[x,y] \in K$. \\
+A continuación, se presentan ejemplos de álgebras de Lie las cuales se clasifican en cuatro familias $\mathbf{A}_\mathfrak{l},\mathbf{B}_\mathfrak{l}, \mathbf{C}_\mathfrak{l}, \mathbf{D}_\mathfrak{l}$ las cuales son llamadas \textbf{álgebras de Lie clásicas}.
+\begin{example}
+\begin{itemize}
+    \item $A_\mathfrak{l}$:  Sea $V$ un espacio vectorial con $\dim(V)=\mathfrak{l}+1$, defina
+    $$ \mathfrak{sl}(V)= \{f:V\rightarrow V \suchthat \tr(f)=0 \}$$
+    $\mathfrak{sl}(V)$ es una subálgebra de $\mathfrak{gl}(V)$, llamada el \textbf{álgebra especial lineal}.\\
+    Una base para $\mathfrak{sl}(V)$ son las matrices $e_{ij}$ de la base canónica estandar con $i\neq j$ las cuales son en total $(\mathfrak{l}+1)^2- (\mathfrak{l}+1)$ junto con las matrices $h_{ij}=e_{ii}- e_{i+1,i+1}$, las cuales son en total $\mathfrak{l}$, de dódne $\dim(\mathfrak{sl}(V))=(\mathfrak{l}+1)^2-1$
+    \item $C_\mathfrak{l}$: Sea $V$ un espacio vectorial de dimensión $2l$ con una base ordenada $(v_1, \cdots, v_{2l})$.  Defina una forma simétrica no degenerada: 
+        $$f: V\times V \rightarrow \mathbb{C} $$
+        $$(\overline{v}, \overline{w})\rightarrow \overline{v}^t \mathcal{S} \overline{w},$$
+    dada por la matriz $\mathcal{S}=\begin{pmatrix}0 & I_l \\
+        -I_l & 0 \end{pmatrix}$. Se define  el \textbf{álgebra simpléctica } $\mathfrak{sp}(V)$ o $\mathfrak{sp}(2l,\mathbb{C})$ de la siguiente forma
+        $$\mathfrak{sp}(2l,\mathbb{C}) =\{ x: V\rightarrow V \suchthat f(x\overline{v}, \overline{w})=-f(\overline{v}, x \overline{w})\} $$
+         Si $x= \begin{pmatrix} m & n \\
+         p & q\end{pmatrix}$ con $m, n, p, q \in \mathfrak{gl}(l)$, $x\in \mathfrak{sp}(2l, \mathbb{C})$ si y sólo si $\mathcal{S}x= -x^t \mathcal{S}$, de dónde se deducen las condiciones: $n^t=n$, $p^t=p$, $m^t=-q$, de dónde $\tr(x)=0$, de ésta forma  se puede construir una base para $\mathfrak{sp}(2l, \mathbb{C})$ y se obtiene que $\dim(\mathfrak{sp}(2l, \mathbb{C}))=2l^2+l $. 
+         \item $B_{\mathfrak{l}}$: Sea $V$ un espacio vectorial con $\dim(V)=2l+1$, sea $f$ la forma bilineal no degenerada cuya matriz es $\mathcal{S}= \begin{pmatrix}1 & 0 & 0 \\
+         0 & 0 & I_{l} \\
+         0 & I_{l} & 0\end{pmatrix}$, el \textbf{álgebra ortogonal } $\mathfrak{o}(V)$ O $\mathfrak{o}(2l+1, \mathbb{C})$ de la siguiente forma
+         $$ \mathfrak{o}(2l+1, \mathbb{C})=  \{ x:V \rightarrow V \suchthat f(xv,w)=-f(v,xw) \} $$ , si se escribe $x=\begin{pmatrix} a & b_1 & b_2 \\
+         c_1 & m & n \\
+         c_2 & p & q\end{pmatrix}$ $x \in \mathfrak{o}(2l+1, \mathbb{C})$ si y sólo si $\mathcal{S}x= -x^t \mathcal{S}$, de dónde se obtienen las condiciones $a=0$, $c_1=-b_2^t$, $c_2=-b_1^t$, $q=-m^t$, $n^t=-n$, $p^t=-p$, de dónde $Tr(x)=0$, de ésta forma se puede construir una base para $\mathfrak{o}(2l+1,\mathbb{C})$ y se obtiene que $\dim (\\mathfrak{o}(2l+1,\mathbb{C})= 2l^2+l$.
+         \item $D_\mathfrak{l}$: Su construcción es análoga que $B_\mathfrak{l}$, pero se utiliza un espacio vectorial $V$ con $\dim(V)=2l$, y la matriz que define la forma bilineal es $s=\begin{pmatrix} 0 & I_l \\
+         I_l & 0\end{pmatrix}$.
+         \end{itemize}
+         \end{example}
+         Un \textbf{Ideal} de un álgebra de Lie $\mathfrak{g}$ es un subespacio vectorial $\mathfrak{h}\subset \mathfrak{g} $ tal que para todo $x\in \mathfrak{g}$, $y\in \mathfrak{h}$ se tiene que $[x,y]\in \mathfrak{h}$.
+\subsection{Álgebras de Lie semisimples}
+El concepto de álgebra de Lie semisimple es fundamental para ésta teoría, se presentan dos acercamientos equivalente a éste concepto. La primera definición que se presenta está relacionada con el concepto de solubilidad.\\
+
+\textbf{Solubilidad}.\\
+\textbf{Observación:} Si $\mathfrak{g}$ es un álgebra de Lie y $V,W\subset \mathfrak{g}$ son subespacios, entonces
+$$[V,W]=\Span\{[v,w] \suchthat v\in V, w\in W\}$$. \\
+Dada un álgebra de lie $\mathfrak{g}$ se define la serie derivada de $\mathfrak{g}$ como la siguiente cadena de ideales
+$$\cdots\mathfrak{g}^{(n)} \subset \mathfrak{g}^{(n-1)} \subset \cdots \subset \mathfrak{g}^{(1)} \subset \mathfrak{g}^{(0)}=\mathfrak{g}  $$
+donde $\mathfrak{g}^{(i+1)}= [\mathfrak{g}^{(i)}, \mathfrak{g}^{(i)}]$.\\
+
+Un álgebra de Lie es \textbf{soluble} si existe $n\in \mathbb{N}$ tal que $g^{(n)}=0$.
+\begin{definition}
+Un álgebra de Lie $\mathfrak{g}$ es \textbf{simple} si $[L,L]\neq 0$ (es decir, no es abeliana) y no tiene ideales diferentes a $0$ y $\mathfrak{g}$.
+\end{definition}
+
+Algunos observaciones importantes  acerca de solubilidad son las siguientes:
+\begin{proposition}
+Sea $\mathfrak{g}$ un álgebra de Lie.
+\begin{itemize}
+    \item Si $\mathfrak{g}$ es soluble, también lo son todas sus subálgebras e imágenes bajo homomorfismo de álgebras de Lie.
+    \item Si $I$ es un ideal soluble de $\mathfrak{g}$ tal que $\mathfrak{g}/I$ es soluble, entonces $\mathfrak{g}$ es soluble.
+    \item Si $I,J$ son ideales solubles, entonces $I+J$ es soluble
+\end{itemize}
+\end{proposition}
+\begin{proof}
+\citep[Chap 3, Proposition 1]{humphreys2012introduction}
+\end{proof}
+De la anterior proposición, dado un ideal $I$ soluble máxima, éste resulta ser único, debido a que si $J$ es otro ideal soluble, $I+J$ es soluble, por ende $I+J=I$, así $J\subset I$. Asi se obtiene la siguiente definición.
+\begin{definition}
+Sea $\mathfrak{g}$ un álgebra de Lie, el ideal soluble maximal de $\mathfrak{g}$ es llamado el \textbf{radical} de $\mathfrak{g}$, se denota $\Rad(\mathfrak{g})$.
+\end{definition}
+La primera definición que se presenta de semisimplicidad es entonces:
+\begin{definition}
+Un álgebra de Lie es \textbf{semisimple} si $\Rad(g)=0$.
+\end{definition}
+Toda álgebra de Lie simple es semisimple, ya que  si $\mathfrak{g}$ no tiene ideales diferentes a $0$ y $\mathfrak{g}$, $\mathfrak{g}$ no es soluble y por tanto $\Rad(\mathfrak{g})=0$. \\
+\textbf{Forma de Killing.}\\
+Para dar una definición equivalente de álgebra semisimple, se introduce la forma de Killing de un álgebra de Lie, para éste propósito note que un  álgebra de Lie $\mathfrak{g}$ actúa en sí misma mediante la representación adjunta, es decir, un homomorfismo de álgebras de Lie:
+$$ad_{\mathfrak{g}}: \mathfrak{g} \longrightarrow \mathfrak{gl}(\mathfrak{g}) $$
+$$x \longrightarrow \{ y \rightarrow [x,y] \} $$
+de ésta forma,se define una forma bilineal compleja simétrica denominada la \textbf{forma de Killing} $\kappa$ de $\mathfrak{g}$ así:
+$$ \kappa(x,y):=\tr \left(ad_{\mathfrak{g}}(x) ad_{\mathfrak{g}}(y) \right) \, \, \, \forall x,y \in \mathfrak{g}$$
+\begin{theorem}
+Sea $\mathfrak{g}$ un álgebra de Lie, $\mathfrak{g}$ es semisimple si y sólo si su forma de killing $\kappa$ es no degenerada.
+\end{theorem}
+\begin{proof}
+\citep[Chap 3, Theorem ??]{humphreys2012introduction}
+\end{proof}
+
+\section{Descomposición de espacio de raíces}
+Sea $V$ un espacio vectorial de dimensión finita, $x\in \End(V)$ es \textbf{semisimple} si las raíces de su polinomio minimal sobre $\mathbb{C}$ son todas distintas, de forma equivalente $x$ es semisimple si es diagonalizable.  $x\in \End(V)$ es \textbf{nilpotente} si existe $n\in \mathbb{N}$ tal que $x^n=1$. 
+\begin{proposition}[Descomposición de Jordan-Chevalley]
+Sea $V$ un espacio vectorial de  dimensión finita sobre $\mathbb{C}$, $x\in \End (V)$.
+\begin{itemize}
+    \item Existen únicos $x_n,x_s\in \End(V)$ tal que $x=x_s + x_n$ con $x_s$ semisimple, $x_n$ nilpontente y $x_s,x_n$ conmutan.
+    \item Existen $p(T),q(T)$ polinomios en una indeterminada sin término constante tal que $x_s=p(x)$, $x_n=q(x)$, En particular, $x_s,x_n$ conmutan con cualquier homomorfismo que conmuta con $x$.
+\end{itemize}
+\end{proposition}
+A $x_s, x_n$ se les denominan la parte semisimple y la parte nilpotente de $x$ respectivamente. Se busca ahora extender la noción de descomposición de Jordan-Chevalley para un álgebra de Lie semisimple $\mathfrak{g}$.
+
+\begin{lemma}
+Sea $x\in End(V)$, con $x=x_s+x_n$, entonces la descomposición de Jordan-Chevalley de $ad(x)$ en $\End(\End(V))$ es $ad(x)=ad(x_s)+ad(x_n)$. 
+\end{lemma}
+Dada una $\mathbb{C}$-álgebra $\mathfrak{U}$, una \textbf{derivación} en $\mathfrak{U}$ es una transformación lineal $\delta: \mathfrak{U}\rightarrow \mathfrak{U}$ que satisface $\delta(ab)= a\delta(b)+ \delta(a) b$ (la regla del producto usual). Se denota por $Der\mathfrak{U}$ al subespacio de $\End(\mathfrak{U})$ formado por todas las derivaciones de $\mathfrak{U}$, se tienen los siguientes resultados
+\begin{lemma}
+Sea $\mfF$ una $\mathbb{C}$-álgebra de dimensión finita, $Der\mathfrak{U}$ contiene la parte semisimple y la parte nilpotente de todos sus elementos.
+\end{lemma}
+\begin{theorem}
+Sea $\mathfrak{g}$ un álgebra de Lie semisimple, entonces $ad(\mathfrak{g})=Der\mathfrak{g} $.
+\end{theorem}
+Con base en éste teorema, se puede extender la descomposición de Jordan-Chevalley a un álgebra de Lie $\mathfrak{g}$ de la siguiente forma: la asignación $\mathfrak{g}\rightarrow ad(\mathfrak{g}$ dada por $x\rightarrow ad(x)$ es uno a uno, entonces cada $x\in \mathfrak{g}$ determina $s,n\in \mathfrak{g}$ tales que $ad(x)=ad(s) +  ad(n) \in \End(\mathfrak{g})$, de esta forma $x=s+n$ con $[s,n]=0$, se dice que $s$ es \textbf{ad-semisimple} y $n$ es \textbf{ad-nilpotente},con un poco de abuso de notación $s=x_s$, $n=x_n$ se les denominan las partes \textbf{simples} y \textbf{nilpontentes} de $x$ respectivamente. \\
+
+De ésta forma, $x\in \mathfrak{g}$ es \textbf{semisimple} si $x_n=0$, es decir, su parte nilpotente es $0$.\\
+
+Sea $\mathfrak{g}$ un álgebra de Lie semisimple, una subálgebra $\mathfrak{t}\subset \mathfrak{g}$ generada por elementos semisimples se le denomina una \textit{subálgebra toral}, éste tipo de subálgebras siempre existen y además si $\mathfrak{t}$ es una subálgebra toral es abeliana \citep{humphreys2012introduction}. \\
+Considere una subálgebra de Cartánl $\mathfrak{t}\subset \mathfrak{g}$ maximal, como $\mathfrak{t}$ es abeliana se tiene que
+$$0= \Ad([t,t'])=\Ad(t)\Ad(t')-\Ad(t')\Ad(t) $$
+entonces existe una base  de $\mathfrak{g}$ formada por vectores propios de $Ad \, T)$, es decir
+$$ \mathfrak{g}= \bigoplus_{\alpha \in \mathfrak{t}^{*}} \mathfrak{g}_\alpha$$
+donde para $\alpha \in \mathfrak{t}^{*}$, $\mathfrak{g}_{\alpha} = \{ x\in \mathfrak{g} \suchthat [t,x]= \alpha(t)x \,\, \mbox{para todo} \, \, t\in \mathfrak{t} \}$.
+\begin{definition}
+Se define  el \textbf{sistema de raíces} $\Phi$ de $\mathfrak{g}$ como la colección 
+$$\Phi:= \{ \alpha \in \mathfrak{t}^{*} \suchthat \mathfrak{g}_{\alpha} \neq 0 \}$$
+\end{definition}
+
+Una proposición sencilla pero interesante acerca de la descomposición de espacio de raíces es la siguiente:
+\begin{proposition}
+Si $\alpha, \beta \in \mathfrak{t}^*$, $[\mathfrak{g}_{\alpha}, \mathfrak{g}_{\beta}] \subset \mathfrak{g}_{\alpha+\beta}$. Si $x\in \mathfrak{g}_\alpha$, $\alpha\neq 0$ entonces $Ad(x) $ es nilpotente. Si $\alpha, \beta \in \mathfrak{t}^*$ y $\alpha+ \beta \neq 0$, entonces $\mathfrak{g}_{\alpha}$ es ortogonal a $\mathfrak{g_\beta}$ con respecto a la forma de Killing $\kappa$ de $\mathfrak{g}$.
+\end{proposition}
+\textbf{Demostración.}\\
+Para la primera afirmación, basta verificar para los elementos básicos de $[\mathfrak{g}_{\alpha}, \mathfrak{g}_{\beta}$. Si $x\in \mathfrak{g}_\alpha$, $y\in \mathfrak{g}_\beta$ y $t\in \mathfrak{t}$ por la identidad de Jacobi se tiene que 
+\begin{align*}
+    [h,[x,y]]&=-[x,[y,h]]-[y,[h,x]] \\
+    &= [x,[h,y]] + [[h,x],y] \\
+    &=[x, \beta (h) y] + [\alpha(h)x, y ] \\
+    &= \beta(h) [x,y]+ \alpha(h)[x,y] \\
+    &= (\alpha + \beta)(h)[x,y]
+\end{align*}
+Por tanto $[x,y]\in \mathfrak{g}_{\alpha+\beta}$. \\
+Para la última afirmación, note que existe $t\in \mathfrak{t}$ tal que $(\alpha+ \beta)(t)\neq 0$, entonces si $x\in \mathfrak{g}_{\alpha}$,$y\in \mathfrak{g}_\beta$ como la forma de Killing es asociativa se obtiene que
+$$\kappa ([h,x],y)= -\kappa([x,h],y)=- \kappa (x,[h,y]) $$
+lo cual es equivalente a $\alpha(h) \kappa(x,y)=-\beta(h) \kappa(x,y)$, de donde $(\alpha + \beta) (h) \kappa (x,y)=0$ y por tanto $\kappa(x,y)=0$\qed
+
+Como la restricción de la forma de Killing $\kappa$  a la subálgebra $\mathfrak{t}$ es no degenerada (\cite{humphreys2012introduction},Chap 8, Coroloario 8.2). se puede identificar $\mathfrak{t}$ con $\mathfrak{t}^*$ de la siguiente forma: a $\varphi \in \mathfrak{t}^*$ corresponde al único elemento $t_{\varphi} \in \mathfrak{t}$ que satisface $\varphi(t)=\kappa(t_{\varphi},t)$ para todo $t\in  \mathfrak{t}$. En particular, $\Phi$ corresponde al subconjunto $\{t_{\alpha}; \alpha \in \Phi \}\subset \mathfrak{t}$. \\
+
+
+Algunas de las características  principales de la descomposición en espacio de raíces son las siguientes.
+\begin{proposition}\label{prop: sistema de raices de alg de lie ss}
+Sea $\Phi$ un sistema de raíces para un álgebra de Lie $\mathfrak{g}$ con subálgebra toral $\mathfrak{t}$
+\begin{itemize}
+    \item[a)] $\Phi$ genera a $\mathfrak{t}^*$.
+    \item[b)] Si $\alpha\in \Phi$, entonces $-\alpha \in \Phi$, más aún, ningún otro multiplo entero de $\alpha$ pertenece al sistema de raíces.
+    \item[c)] Si $\alpha, \beta \in \Phi$,entonces $\beta(t_{\alpha}) \in \mathbb{Z}$ y $\beta- \beta(t_{\alpha})\alpha \in \Phi$.Los números $\beta(t_{\alpha})$  son llamados \textbf{enteros de Cartan}.
+\end{itemize}
+\end{proposition}
+\begin{proof}
+Se probará b).  Sea $\alpha \in \Phi$, suponga que $-\alpha \not\in \Phi$, entonces $\mathfrak{g}_{-\alpha}=0  $  y $\alpha + \beta \neq 0$ para todo $\beta \in \mathfrak{t}^*$ (por la proposición anterior), por tanto $\kappa (\mathfrak{g}_{\alpha}, \mathfrak{g}_{\beta})=0$ para todo $\beta \in \mathfrak{t}^*$, pero esto implica que $\kappa (\mathfrak{g}_{\alpha}, \mathfrak{g})=0$, lo cual contradice que la forma de Killing sea no degenerada. \\
+
+Se puede transferir la forma de Killing a $\mathfrak{t}^*$ definiendo $(\gamma, \delta)= \kappa(t_{\gamma}, t_{\delta})$ para todo $\gamma, \delta \in \mathfrak{t}^*$ (Esto debido a que la forma de Killing restringida a $\mathfrak{t}$ es no degenerada). Como $\Phi$ genera a $\mathfrak{t}^*$, existe una base $\alpha_1, \cdots, \alpha_l$ de $\mathfrak{t}^*$ que consiste de raíces. Si $\beta\in \Phi$, se puede probar que $\beta$ se escribe de manera única como combinación lineal de la base $\alpha_1, \cdots, \alpha_l$ con coeficientes racionales. De esta forma se obtiene un subespacio vectorial sobre $\mathbb{Q}$ $E_{Q}$ de $\mathfrak{t}^*$ generado por todas las raíces. Éste espacio vectorial se puede extender a un espacio vectorial real $E$ definiendo $E=\mathbb{R} \otimes_{\mathbb{Q}} E_{\mathbb{Q}}$, la forma de Killing se extiende a $E$ y por tanto se obtiene un espacio euclideo. El siguiente teorema contiene los principales resultados sobre la descomposición  en espacio de raíces.
+\end{proof}
+
+
+\begin{theorem}
+Sean $\mathfrak{g}$, $\mathfrak{t}$, $\Phi$, $E$ como en Proposición \ref{prop: sistema de raices de alg de lie ss}.
+\begin{itemize}
+    \item $\Phi$ genera a $E$, y $0\not\in \Phi$.
+    \item Si $\alpha\in \Phi$, entonces $-\alpha \in \Phi$, pero ningún otro multiplo escalar de $\alpha$ es una raíz. 
+    \item Si $\alpha, \beta \in \Phi$, entonces $\beta- \frac{2(\beta, \alpha)}{(\alpha, \alpha)}\alpha \in \Phi$.
+    \item Si $\alpha, \beta \in \Phi$, entonces $\frac{2(\beta, \alpha)}{(\alpha,\alpha)} \in \mathbb{Z}$.
+\end{itemize}
+\end{theorem}
+
+Si $\mathfrak{g}\subset \mathfrak{gl}_n$ con $h_1, \cdots, h_r$ base para $\mathfrak{t}$ los elementos de la subálgebra toral $\mathfrak{t}$ se pueden pensar como matrices diagonales, entonces los funcionales $e_1,\cdots, e_n $ con $e_i (h_j)$ la entrada de la fila $i$ en la matriz diagonal $h_j$ generan a $\mathfrak{t}^*$.Existe una base de $\mathfrak{t}^*$ llamada \textit{raíces simples}, tal que toda raíz es suma de raíces simples con coeficientes no negativos (raíces positivas) o suma de raíces simples con coeficientes no positivos (raíces negativas).El conjunto de raíces simples se denotará por $\Delta$.
+\begin{example}
+Sea $\mathfrak{g}= \mathfrak{sl}_3$, la subálgebra toral es
+$$\mathfrak{t}=\left\lbrace\begin{pmatrix}a_1 & 0  & 0\\
+0 & a_2 & 0\\
+0 & 0 & a_3\end{pmatrix} : a_1 + a_2+a_3=0 \right \rbrace$$
+Los funcionales $e_1, e_2, e_3$ generan $\mathfrak{t}^*$, pero la condición de que la traza sea nula implica que $e_1+e_2+e_3=0$, se puede verificar que todos los espacios de raíces no nulos son 1-dimensionales y que las raíces simples son $\Delta=\{\alpha_1, \alpha_2 \}$ donde $\alpha_1=e_1-e_2$, $\alpha_2= e_2-e_3$, así: 
+$$\mathfrak{g} \cong \mathfrak{g}_{\alpha_1}\oplus \mathfrak{g}_{\alpha_2} \oplus \mathfrak{g}_{\alpha_1+ \alpha_2}\oplus \mathfrak{t} \oplus \mathfrak{g}_{-\alpha_1-\alpha_2} \oplus \mathfrak{g}_{-\alpha_2} \oplus \mathfrak{g}_{-\alpha_1} $$
+\end{example}
+\subsubsection{Sistemas de raíces}
+\begin{definition}
+Sea $E$ un espacio euclideo. Un \textbf{sistema de raíces} es un subconjunto finito $\Phi \subset E- \{ 0\}$  tal que:
+\begin{itemize}
+    \item $\Span_{\mathbb{R}}(\Phi)=E$
+    \item Si $\alpha \in \Phi$, el único múltiplo de $\alpha$ en $\Phi$ es $-\alpha$
+    \item Invarianza bajo reflexiones: Para todo  $\alpha \in \Phi$, si $\beta \in \Phi$, entonces la reflexión:
+    $$r_{\alpha}(\beta)=\beta - \frac{2(\alpha,\beta)}{(\alpha,\alpha)} \in \Phi$$
+    \item  Condición cristalográfica: Todos los coeficientes de reflexión $\frac{2(\alpha,\beta))}{(\alpha,\alpha)}$ son enteros,llamados enteros de Cartan.
+\end{itemize}
+
+\end{definition}
+La condición cristalográfica restringe los posibles ángulos que puedne haber entre dos raíces, si $\theta$ es el ángulo entre dos raíces $\alpha, \beta$ se sabe que $\cos (\theta)=\frac{(\alpha, \beta)}{|\alpha||\beta|}$ , entonces $\frac{2(\alpha,\beta))}{(\alpha,\alpha)}= 2 \frac{|\beta|}{|\alpha|}\cos(\theta)$ y  al multiplicar $\frac{2(\alpha, \beta)}{(\alpha, \alpha)} ,\frac{2(\beta, \alpha)}{(\beta, \beta)}  \in \mathbb{Z}$ se obtiene
+$$4\frac{(\alpha, \beta)(\beta, \alpha)}{(\alpha, \alpha)(\beta,\beta)}=\frac{4(\alpha, \beta)^2}{|\alpha^2||\beta|^2}= 4\cos^2 (\theta) \in \mathbb{Z} $$
+De donde se obtiene las siguientes posibilidades
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+$\theta $                         & $\frac{\pi}{2}$ & $\frac{\pi}{3},\frac{2\pi}{3}$ & $\frac{\pi}{4},\frac{3\pi}{4}$ & $\frac{\pi}{6},\frac{5\pi}{6}$ \\ \hline
+$(\alpha, \alpha)/ (\beta,\beta)$ & Indeterminado   & 1                              & 2                              & 3                              \\ \hline
+\end{tabular}
+\end{table}
+\begin{definition}
+Un subconjunto $\Delta$ de un sistema de raíces $\Phi$ es una \textbf{base} si
+\begin{itemize}
+    \item $\Delta$ es una base para el espacio euclideo $E$,
+    \item cada raíz $\beta$ se puede escribir como $\beta= \sum k_{\alpha}\alpha$, $\alpha\in \Delta$ con coeficientes enteros $k_{\alpha}$ todos no negativos o todos no positivos.
+\end{itemize}
+\end{definition}
+A los raíces en $\Delta$ se les llama \textbf{raíces simples}, como $\Delta$ es una base para $E$, entonces $Car \Delta = \dim (E)$. El \textbf{tamaño} de una raíz $\beta$ relativo a $\Delta$ se define como $ht\beta= \sum_{\alpha\in \Delta}k_{\alpha}$. Una raíz $\beta$ es \textbf{positiva} si $k_{\alpha}\geq 0$ para todo $\alpha \in \Delta$, (respectivamente \textbf{negativa})
+\\
+\textbf{Grupo de Weyl}\\
+\begin{definition}
+Sea $\Phi$ un sistema de raíces en el espacio euclideo $E$. Denote por $\mathcal{W}$ el subgrupo de $GL(E)$ generado por todas las reflexiones $\sigma_{\alpha}$ ($\alpha \in \Phi$).
+\end{definition}
+Por el axioma 3  de sistema de raíces, el grupo de Weyl deja invariante el sistema de raíces $\Phi$, es decir induce una permutación en $\Phi$ y como $\Phi$ es finito y genera a $E$, $\mathcal{W}$ puede identificarse con un subgrupo del grupo de permutaciones $\mathbb{S}_{|\Phi|}$ \\
+
+\textbf{Diagramas de Coxeter} \\
+Si $\alpha, \beta$ son raíces positivas distintas se sabe que $\frac{(\alpha, \beta)(\beta, \alpha)}{(\alpha, \alpha)(\beta,\beta)}=0,1,2,3$.Se define el \textbf{grafo de Coxeter} de $\Phi$ como el grafo que tiene $\dim(E)$ vértices,  y el vértice $i$ está unido con el vértice $j$ (para $i\neq j$) por $\frac{(\alpha, \beta)(\beta, \alpha)}{(\alpha, \alpha)(\beta,\beta)}$ aristas.\\
+
+La \textbf{Matriz de Cartan } asociada a un sistema de raíces simples  $\Delta=\{\alpha_i\}$ está definida por
+$$C_{ij}=\frac{2(\alpha_i, \alpha_j)}{(\alpha_j, \alpha_j)} $$
+A continuación, se ejemplifican los conceptos anteriores.
+\begin{example}[Sistemas de raíces de dimensión 2]
+Un conjunto de vectores  $\alpha\in \mathbb{R}^2$ de tamano $N$ es estable bajo reflexiones si determina un peligono regular de $2N$ lados, por tanto los sistemas de raíces en dimensión 2 son:
+\begin{enumerate}
+    \item  $A_1\times A_1$: el ángulo entre sus raíces es de $\frac{\pi}{2}$ Su matriz de Cartan es 
+    $$\begin{pmatrix}  2 & 0 \\
+    0 & 2\end{pmatrix} $$
+    Su grafo de Coxeter es:
+   $$\xymatrix{ \bullet\ar@{}[rr]     && \bullet}$$
+
+    \item $A_2$: El ángulo entre sus raíces es de $\frac{2\pi}{3}$, su matriz de Cartan es
+    $$\begin{pmatrix}  2 & -1 \\
+    -1 & 2\end{pmatrix} $$
+    Su grafo de Coxeter es:
+   $$\xymatrix{ \bullet\ar@{-}[rr]     && \bullet}$$
+    \item $B_2$: El ángulo entre sus raíces es de $\frac{3\pi}{4}$, su matriz de Cartan es 
+     $$\begin{pmatrix}  2 & -2 \\
+    -1 & 2\end{pmatrix} $$
+    Su grafo de Coxeter es:
+   $$\xymatrix{ \bullet\ar@{=}[rr]     && \bullet}$$
+    \item $G_2$: El ángulo entre sus raíces es de $\frac{5\pi}{6}$, su matriz de Cartan es
+    $$\begin{pmatrix}  2 & -1 \\
+    -3 & 2\end{pmatrix} $$
+    Su grafo de Coxeter es:
+   $$\xymatrix{ \bullet\ar@3{-}[rr]    && \bullet}$$
+    
+\end{enumerate}
+
+\end{example}
+Todos los sistemas de raíces están clasificados salvo isomorfismo según su matriz de Cartán y diagrama de Coxeter, esto debido a que la matriz de Cartán determina de manera única el sistema de raíces salvo isomorfismo, la clasificación completa puede ser consultada en (\cite{humphreys2012introduction}, Cap 11.4), para éste desarrollo se presentan solo algunos de los posibles sistemas de raíces de dimensión $l$, los cuales son los sistemas tipo $A,B,C,D$, se imponen algunas restricciones sobre $l$ en algunos casos para evitar repeticiones. 
+
+\begin{example}[Sistemas de raíces de tipo $A,B,C,D$ de dimensión $l$]
+ \begin{enumerate}
+    \item $A_l$: 
+    La matriz de Cartan para éste sistema es 
+    $$\begin{pmatrix}2 & -1 & 0 & & \cdots &0 \\
+    -1 & 2 & -1 &0 & \cdots & 0 \\
+    0 & -1 & 2 &-1 & \cdots &0\\
+    \vdots & \\
+    0 & 0 &0 & \cdots & -1 & 2\end{pmatrix} $$
+    Su diagrama de Coxeter es :
+    $$\xymatrix{ \bullet_1\ar@{-}[rr] && \bullet_2\ar@{-}[rr] &&\cdots  \cdots \cdots && \bullet_{l-1}\ar@{-}[rr]    && \bullet_l}$$
+    \item $B_l$: ($l\geq 2$)
+    La matriz de Cartan es 
+   $$\begin{pmatrix}2 & -1 & 0 & & \cdots &0 \\
+    -1 & 2 & -1 &0 & \cdots & 0 \\
+    \vdots & \\
+    0 & \cdots & 0 &-1 & 2 &-2\\
+    0 & 0 &\cdots &0  & -1 & 2\end{pmatrix} $$
+    Su diagrama de Coxeter es 
+    $$\xymatrix{ \bullet_1\ar@{-}[rr] && \bullet_2\ar@{-}[rr] &&\cdots  \cdots \cdots && \bullet_{l-2}\ar@{-}[rr] && \bullet_{l-1}  \ar@{=>}[rr]    && \bullet_l  }$$
+    \item $C_l$: ($l\geq 3$)
+    $$\begin{pmatrix}2 & -1 & 0 & & \cdots &0 \\
+    -1 & 2 & -1 &0 & \cdots & 0 \\
+     0 &-1 & 2 &-1 & \cdots & 0\\
+    \vdots & \\
+    0 &0 & \cdots & -1 & 2 & -1 \\
+    0 & 0 &\cdots &0  & -2 & 2\end{pmatrix}$$
+    Su diagrama de Coxeter es 
+     $$\xymatrix{ \bullet_1\ar@{-}[rr] && \bullet_2\ar@{-}[rr] &&\cdots  \cdots \cdots && \bullet_{l-2}\ar@{-}[rr] && \bullet_{l-1}  \ar@{<=}[rr]    && \bullet_l  }$$
+     \item $D_l$: ($l\geq 4$)
+     Su matriz de Cartan es
+     $$\begin{pmatrix}2 & -1 & 0 & & \cdots &0 &0 &0 \\
+    -1 & 2 & -1 &0 & \cdots & 0 & 0 &0\\
+     0 & 0 & \cdots  &-1 & 2 &-1 & 0 & 0\\
+    \vdots & \\
+    0 &0 & \cdots & & -1 & 2 & -1 &-1 \\
+    0 & 0 & \cdots & & 0 &-1 &2 &0 \\
+    0 & 0 &\cdots &0 & 0  & -1 & 0 & 2\end{pmatrix}$$
+    Su diagrama de Coxeter es 
+      $$\xymatrix{  && && && && && \bullet_{l-1} \\
+      \bullet_1\ar@{-}[rr] && \bullet_2\ar@{-}[rr] &&\cdots  \cdots \cdots && \bullet_{l-3}\ar@{-}[rr] && \bullet_{l-2} \ar@{-}[urr] \ar@{-}[drr]    &&  \\
+       && && && && && \bullet_l}$$
+\end{enumerate}
+\end{example}
+
+Se puede dar una construcción explícita de los sistemas de raíces  anteriormente mencionados, se consideran espacios euclideos con el producto interior usual, $e_1, \cdots, e_n$ denotan  los vectores de  la base canónica de $\mathbb{R}^n$. Sea  $I$ el  retículo generado por éstos vectores, es decir : $I=\Span_{\mathbb{Z}} \{e_1, \cdots, e_n \}$.
+\begin{itemize}
+    \item $A_l$: ($l\geq 1$). Sea $E\subset \mathbb{R}^{l+1}$ el subespacio ortogonal al vector $e_1+ \cdots e_{l+1}$, sea $I'= I \cap E$, el sistema de raíces $\Phi$ está formado por los vectores $\alpha \in I'$ tal que $(\alpha, \alpha)=2$, los elementos de $\Phi$ se pueden describir de la siguiente forma
+    $$\Phi= \{ e_i - e_j \suchthat i \neq j\} $$
+    \item $B_l$: ($l \geq 2$). Sea $E=\mathbb{R}^l$, el sistema de raíces es dado por
+    $$\Phi=\{ \alpha \in I \suchthat (\alpha,\alpha)=1 \, \mbox{o}\, 2)\} $$
+    Se puede verificar que los elementos de $\Phi$ son
+    $$\Phi=\{\pm e_i, \pm(e_i \pm e_j), \, \,  \, i\neq j \} $$
+    \item $C_l$: ($l \geq 3$). Sea $E=\mathbb{R}^l$, el sistema de raíces de éste tipo es:
+    $$\Phi=\{\pm 2e_i, \pm (e_i \pm e_j) , \, \, i\neq j\} $$
+    \item $D_l$: ($l \geq 4$). Sea $E=\mathbb{R}^l$, el sistema de raíces de éste tipo es:
+    $$\Phi= \{\alpha\in I \suchthat (\alpha, \alpha)=2 \} $$
+    De forma explícita, éste sistema está conformado por
+    $$\Phi= \{\pm (e_i \pm e_j) \, \, i\neq j \} $$.
+\end{itemize}
+\subsection{Representaciones de álgebras de Lie semisimples}
+\textbf{Álgebra envolvente Universal}\\
+Sea $\mfg$ un álgebra de Lie, a $\mfg$ se le asocia un álgebra asociativa con unidad $U(\mfg)$ denominada el álgebra envolvente universal  de $\mfg$ junto con una función $i: \mfg \rightarrow U(\mfg)$ que satisface $i([x,y])= i(x)i(y)-i(y)i(x)$ además cumple la siguiente propiedad universal:
+
+Para toda $W$  álgebra associativa con unidad sobre $\mathbb{C}$  y $j: \mfg \rightarrow W$ transformacion lineal tal que $j([x,y])= j(x)j(y)-j(y)j(x)$, existe un \'unico $\varphi: U(g) \rightarrow W$ morfismo de \'algebras associativas con unidad tal que $\varphi \circ i = j$. \\
+
+Se puede dar una construcción explícita de ésta álgebra por medio del \textbf{álgebra tensorial} de $\mfg$, para esto denote
+$$T^0\mfg=\mathbb{C}, \, \, \, \,  \, \, , T^{1}\mfg = \mfg \, \, \, \, \, \, T^2 \mfg =\mfg \otimes \mfg, \, \, \, \, \, \, \cdots, T^m \mfg =\mfg \otimes \cdots \otimes \mfg  \, \, (\mbox{$m$ copias}) $$
+Se define el álgebra tensorial: 
+$$\mathcal{I}(\mfg) := \bigoplus_{n\geq 0}T^n \mfg $$
+cuyo producto en elementos homogéneos viene dado por $(v_1 \otimes \cdots \otimes v_k) (w_1 \otimes \otimes \cdots w_m)= v_1\otimes \cdots v_k \otimes w_1 \otimes \cdots \otimes w_m \in T^{k+m}\mfg$. \\
+Considere el ideal $I\subset \mathcal{I}(\mfg)$ generado por todos los elementos de la forma $x\otimes y - y\otimes x - [x,y]$ para cada $x,y \in \mfg$ y se define $U(\mfg) = \mathcal{I}(\mfg) / I$ junto con $i: \mfg \rightarrow U(\mfg)$ dado por la inclusión en $\mathcal{I}(\mfg)$. Por medio de la propiedad universal se puede probar que de hecho ésta álgebra es única. \\
+
+Uno de los resultados principales sobre el álgebra envolvente universal es el \textbf{Teorema de Poincaré-Birkhoff-Witt} (Teorema PBW) el cual es importante para el desarrollo de la teoría de $U(\mfg)$-módulos, por ende a continuación se contextualiza dicho teorema y se enuncian sus principales consecuencias. \\
+
+Denote por $\mathcal{I}= \mathcal{I}(\mfg)$, $\mathcal{G}= \mathcal{I}(\mfg) /J$ con $J$ el ideal generado por todos los elementos de la forma $x\otimes y - y \otimes x$, a $\mathcal{G}$ se le denomina el álgebra simétrica. \\
+
+En el álgebra tensorial, defina $T_m= T^0 \oplus T^1 \oplus \cdots \oplus T^m$ y sea $U_m= \pi (T_m)$ donde $\pi:\mathcal{I}\rightarrow U (\mfg)$ es el homomorfismo canónico, fije $U_{-1}=0$. Se tiene que $U_m U_p \subset U_{m+p}$ y $U_m \subset U_{m+1}$. Sea $G^m= U_m/U_{m-1}$ (como espacio vectorial), la multiplicación en $U(\mfg)$ define un mapa bilineal $G^m \times G^p \rightarrow G^{m+p}$, éste se extiendea un mapa bilineal $\mathfrak{G}\otimes \mathfrak{G}\rightarrow \mathfrak{G}$ donde $\mathfrak{G}= \displaystyle \bigcup_{m=0}^\infty G^m$, dando a $\mathfrak{G}$ estructura de álgebra graduada con unidad.\\
+
+Ya que $\pi(T^m)= U_m$, la transformación lineal $\phi_m: T^m \rightarrow U_m \rightarrow G^m= U_m /U_{m-1}$ está bien definido y es sobreyectivo, de ésta forma se puede definir un homomorfismo sobreyectivo $\phi: \mathcal{I}\rightarrow \mathfrak{G}$. De ésta forma, se enuncia el Teorema PBW y sus principales corolarios.
+\begin{theorem}[Poincaré-Birkhoff- Witt] $\phi: \mathcal{I} \rightarrow \mathfrak{G}$ es un homomorfismo de álgebras, más aún, induce un isomorfismo de álgebras $w: \mathcal{G}\rightarrow \mathfrak{G}$.
+\begin{corolary}
+El homomorfismo canónico $i: \mfg \rightarrow U(\mfg)$ es inyectivo.
+\end{corolary}
+\begin{corolary}
+Sea $(x_1, x_2, \cdots, )$ una base ordenada para $\mfg$. Entonces los elementos $X_{i(1)}\cdots x_{i(m)}= \pi (x_{i(1)}\otimes \cdots \otimes x_{i(m)})$, $m\in \mathbb{Z}^+$, $i(1)\leq i(2) \cdots \leq i(m)$ junto con $1$ forman una base para $U(\mfg)$.
+\end{corolary}
+
+\end{theorem}
+
+
+\textbf{Representaciones de álgebras de Lie semisimples}\\
+
+Recuerde que tener un $\mfg$-modulo es equivalente a una transformacion lineal $\pi:\mfg\to \End(V)$ tal que $\pi([x,y])=\pi(x)\pi(y)-\pi(y)\pi(x)$. Se puede construir una base para $U(\mfg)$ y como consecuencia del teorema de de Poincaré-Birkhoff-Witt (teorema PBW) el mapa $i:\mfg \to U(\mfg) $ es inyectivo. %(\citep{humphreys2012introduction},Teorema 17.3). %Por la propiedad unversal de $U(g)$ existe un unico morfismo de algebras $\pi: U(\mfg)\to End(V)$
+
+De ésta manera los elementos de $\mfg$ se pueden identificar con sus imágenes en $U(\mfg)$ bajo $i$, teniendo en cuenta  ésta identificación todo $\mfg$-módulo se puede considerar como un $U(\mfg)$-módulo y también todo $U(\mfg)$-módulo  puede considerarse como un $\mfg$-módulo actuando por restricción, de esta forma la teoría de representaciones de $\mfg$ y $U(\mfg)$ coinciden. \\
+
+
+
+Sea $\mfg $ un álgebra de Lie semisimple, $\mathfrak{t}$ una subálgebra  de Cartán y $\Phi$ el sistema de raíces. Sea $V$ un $U(\mfg)$- módulo de dimensión finita, la subálgebra $\mathfrak{t}$ actúa sobre $V$ dando una descomposición como espacio vectorial
+$$V = \bigoplus_{\lambda \in \mathfrak{t}^*} V_{\lambda}$$
+donde $$V_{\lambda}= \{ v\in V \suchthat tv= \lambda(t)v \, \, \, \, \forall t\in \mathfrak{t}\}$$
+A los subespacios vectoriales $V_{\lambda}\neq 0$ se les denomina \textbf{espacios de peso} y a $\lambda$ se le denomina un \textbf{peso} de $V$.\\
+
+\begin{example}
+Sea $\mfg$ un álgebra de Lie,  se puede pensar en $\mfg$ como un $\mfg$-módulo  mediante la representación adjunta:
+$$\Ad_{\mathfrak{g}}: \mathfrak{g} \longrightarrow \mathfrak{gl}(\mathfrak{g}) $$
+$$x \longrightarrow \{ y \rightarrow [x,y] \} $$
+Para $t\in \mathfrak{t}$ se tiene que $t\cdot x= [t,x]= \alpha(t)x$
+ con $\alpha \in \mathfrak{t}^*$, entonces los pesos para ésta representación son justamente las raíces $\alpha \in \Phi$, los espacios de peso son $\mfg_{\alpha}$ de la descomposición en espacio de raíces, cada uno de ellos tiene dimensión 1.
+\end{example}
+
+\begin{proposition}
+ Sea $V$ un  $U(\mfg)$-módulo,  con $V= \bigoplus_{\lambda }V_{\lambda}$,  $\mfg_{\alpha}$ envía $V_{\lambda}$ en $V_{\lambda + \alpha}$  con $\alpha \in \Phi$.
+\end{proposition}
+\begin{proof}
+Sea $x \in \mfg_{\alpha}$ para $\alpha \in \Phi$, si $v \in V_{\lambda}$ de la bilinealidad del corchete de Lie se sigue que  para todo $t\in \mathfrak{t}$
+\begin{align*}
+    t(xv)&= [t,x]v + xtv \\
+    &= \alpha(t)xv + x \lambda(t)v \\
+    &=(\alpha + \lambda) (t) xv
+\end{align*}
+Por tanto $xv \in V_{\lambda+ \alpha}$.
+\end{proof}
+
+
+\begin{example}[Representaciones de $\mathfrak{sl}_2$]
+El álgebra de Lie $\mathfrak{sl}_2$ tiene como base las matrices
+$$x=\begin{pmatrix}0 & 1 \\
+0 & 0\end{pmatrix}, \, \, \, \,y=\begin{pmatrix}0 & 0 \\
+1 & 0\end{pmatrix}, \, \, \, \, h=\begin{pmatrix}1 & 0 \\
+0 & -1\end{pmatrix}  $$
+y satisface las siguientes relaciones con el corchete
+$$[x,y]=h \, \, \, [h,x]=2x=-[x,h] \, \, \, [h,y]=-2y=-[y,h] $$
+$\mathfrak{sl}_2$ tiene subálgebra de Cartán 
+$$\mathfrak{t}= \left\lbrace \begin{pmatrix}a_1 & 0 \\
+0 & a_2 \end{pmatrix} : a_1 + a_2=0 \right\rbrace=\Span \{h\}  $$
+
+Como se ha fijado una base para la subálgebra de Cartan $\mathfrak{t}$ y ésta subálgebra tiene dimensión 1, los funcionales lineales $\lambda(t)\in \mathfrak{t}$ se pueden identificar  con escalares $\lambda \in \mathbb{C}$.
+Sea $V$ un módulo de dimensión finita  sobre $U(\mathfrak{sl}_2)$. A partir de las relaciones dadas por el corchete de Lie Se obtiene que si $v\in V_{\lambda}$, entonces $xv\in V_{\lambda+2}, yv \in V_{\lambda-2}$. Como $V$ tiene dimensión finita, existe $w\in V$ tal que $xw=0$, a éste elemento se le denomina un \textbf{vector de peso máximo} con peso $\lambda$. \\
+
+Denote $w=v_0$ al vector de peso máximo $\lambda$, supongamos que $V$ es irreducible (simple), defina $v_{i+1}=\frac{1}{i!}y^i v_0$, se obtienen las siguientes relaciones
+\begin{itemize}
+    \item $hv_i=(\lambda-2i)v_i$,
+    \item $yv_i=(i+1)v_{i+1}$, 
+    \item $xv_i= (\lambda-i +1) v_{i-1}$ \, \, $i\geq1$.
+\end{itemize}
+Como vectores propios correspondientes a valores propios diferentes son linealmente independientes, todos los $v_i$ son linealmente independientes, más aún si $m$ es el entero más pequeño para el cual $v_m \neq 0$ y $v_{m+1}=0$ (existe al ser $V$ de dimensión finita) y como $V$ es irreducible   se obtiene que $\{v_0, \cdots v_m\}$ es una base para $V$. \\
+
+A partir de la última relación, para $i=m+1$ se tiene que  $0= (\lambda-m) v_m$, de donde $\lambda=m$, esto prueba que el peso de un vector de peso máximo es un entero no negativo y  cada peso $\mu$ ocurre con multiplicidad 1, de esta forma se obtiene la siguiente clasificación de las representaciones irreducibles de $\mathfrak{sl}_2$
+\begin{theorem} Sea $V$ un módulo irreducible sobre $U(\mathfrak{sl}_2)$
+\begin{itemize}
+    \item $V$ es la suma directa de sus espacios de peso $V_{\mu}$, con $\mu=m,m-2, \cdots, -(m-2), -m$ con $m+1=\dim(V)$ y $\dim (V_{\mu})=1$ para cada peso $\mu$.
+    \item $V$ tiene un único vector de peso máximo salvo múltiplos escalares, su peso es $m$.
+    \item $sl_2$ actúa sobre $V$ como se describe en las relaciones anteriores sobre la base descrita anteriormente. En particular, \textbf{existe un único módulo irreducible} sobre $\mathfrak{sl}_2$ salvo isomorfismo con dimensión $m+1$ para cada $m\geq 0$. 
+\end{itemize}
+
+\end{theorem}
+\end{example}
+\begin{definition}
+Un \textbf{vector de peso máximo}  de peso $\lambda$ en un $U(\mfg)$-módulo $V$ es un vector no nulo $v^+ \in V_{\lambda}$ aniquilado por todo $g_{\alpha}$ con $\alpha \in \Delta$.
+\end{definition}
+La noción de vector de peso máximo depende de la escogencia de una base $\delta$ del espacio de raíces $\Phi$, además  si $\dim V= \infty $ no se puede garantizar la existencia de un vector de peso máximo. Si $\dim V< \infty$, la \textbf{subálgebra de Borel},la cual es por definición la subálgebra soluble maximal de $\mfg$, además fijada una base $\Delta$ para el sistema de raíces $\Phi$ de $\mfg$, ésta subálgebra se puede describir como 
+$$ B=B(\Delta)= \mathfrak{t} \oplus \bigoplus_{\alpha>0}\mfg_{\alpha} $$
+Gracias al Teorema de Lie, (\cite{humphreys2012introduction}, Cap 4, Teorema 1) tiene un vector propio común (anulado por toda $\mfg_{\alpha}, \alpha \succ 0$. \\
+\begin{example}
+Considere $\mfg=\mathfrak{sl}_2$, la subálgebra generada por $x= \begin{pmatrix} 0 & 1 \\
+0 & 0\end{pmatrix},h= \begin{pmatrix} 1 & 0 \\
+0 & -1\end{pmatrix}$ es la subálgebra de Borel de $\mathfrak{sl}_2$, entonces
+$B= \mathfrak{t} \oplus \Span_{\mathbb{C}}(x)$
+\end{example}
+Se puede establecer una relación de orden parcial en $\mathfrak{t}^*$ de la siguiente forma: Para $\lambda , \mu \in \mathfrak{t}^*$, $\lambda \succ \mu$ si y sólo si $\lambda - \mu =\sum_{\alpha \in \Delta}c_{\alpha}\alpha$ con $c_\alpha\geq 0$ para toda $ \alpha \in \Delta$. Suponga que $V= U(\mfg)v^+$ para  un vector peso maximal $v^+$ con peso $\lambda$, en éste caso se dice que $V$ es un módulo \textbf{cíclico estandar}, el siguiente teorema describe la estructura de éste tipo de módulos. 
+
+\begin{theorem}
+Sea $V$ un $U(\mfg)$- módulo cíclico estándar con vector de peso máximo $v^+ \in V_{\lambda}$. Sea $\Phi^+ = \{ \beta_1, \cdots, \beta_m\}$. Entonces:
+\begin{itemize}
+    \item[a)] $V$ es generado por los vectores $y_{\beta_1}^{i_1}\cdots y_{\beta_m}^{i_m}v^+$  $(i_j\in  \mathbb{Z}^+)$; en particular $V$ es la suma directa de sus espacios de peso.
+    \item[b)] Los pesos de $V$ son de la forma $\mu= \lambda- \sum_{i=1}^l k_i \alpha_i$ con $k_i\in \mathbb{Z}^+$, es decir, todos los pesos satisfacen $\mu \prec \lambda$.
+    \item[c)] Para cada $\mu \in \mathfrak{t}^*$, $\dim V_{\mu}\leq \infty$ y $\dim V_{\lambda}=1$.
+    \item[d)] Todo submódulo de $V$ es suma directa de sus espacios de peso.
+    \item[e)] V es un módulo indescomponible con único  submódulo maximal y un correspondiente cociente irreducible.
+    \item[f)] Toda imagen bajo homomorfismo no nula de $V$ es también cíclica estándar con peso $\lambda$.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+\begin{itemize}
+\item[a)] Denote por $N^- = \displaystyle \bigoplus_{\alpha\prec 0} \mfg_{\alpha}$, $B=B(\Delta)$ la subálgebra de Borel asociada a $\Delta$, se tiene entonces que $\mfg = N^- + B$, por el  teorema de Poincaré Birkhoff-Witt (segundo y tercer corolario), $U(\mfg)v^+= U(N^-) U(B)v^+ = U(N^-) \mathbb{C}v^+$ esto debido a que $v^+$ es un vector propio común para todos los elementos de $B$. Por el teorema PBW $U(N^{-})$ tiene una base formada por producto del álgebra de Lie, $U(N^-)$ tiene una base que consiste de monomios $y_{\beta_1}^{i_1}\cdots y_{\beta_m}^{i_m}$ con $y_{\beta_j}\in \mfg_{\beta_j}$, entonces $V$ es generado por vectores de la forma $y_{\beta_1}^{i_1}\cdots y_{\beta_m}^{i_m}v^+$. 
+\item[b)] Recuerde que $\mfg_{\alpha}$ envía $V_{\lambda}$ en $V_{\lambda+ \alpha}$ para todo $\lambda \in \mathfrak{t}^*$, $\alpha \in \Phi$, entonces el vector $y_{\beta_1}^{i_1}\cdots y_{\beta_m}^{i_m}v^+$ tiene peso $\lambda- \displaystyle \sum_{j} i_j\beta_j$, cada $\beta_j$ se puede escribir como una combinación lineal no negativa entera de raíces simples, de esta forma se obtiene (b).
+\end{itemize}
+\end{proof}
+\begin{corolary}
+Si $V$ es también irreducible, $v^+$ es el único vector de peso máximo salvo múltiplos escalares.
+\end{corolary}
+Para cada $\lambda \in \mathfrak{t}^*$ existe un único $U(\mfg)$-módulo cíclico estandar irreducible con peso $\lambda$, los siguientes teoremas garantizan la unicidad y existencia de dicho módulo. 
+
+\begin{theorem}[Unicidad] Sean $V,W$ dos $U(\mfg)$ módulos cíclicos estandar  con peso máximo $\lambda$. Si $V,W$ son irreducibles entonces $V\cong W$.
+\end{theorem}
+\begin{proof}
+Considere el $U(\mfg)$-módulo $X=V\oplus W$ y sean $v^+, w^+$ los vectores de peso máximo con peso $\lambda$ en $V,W$ respectivamente. Sea $x^+=(v^+, w^+) \in X$, entonces $x^+$ es un vector de peso máximo con peso $\lambda$ en $X$. Sea $Y$ el submódulo de $X$ generado por $x^+$, de ésta forma $Y$ es cíclico estándar. \\
+Sean $p_V: Y\rightarrow V$, $p_W: Y \rightarrow W$  las proyecciones en $V$ y $W$ respectivamente, son claramente homomorfimos de módulos y cumplen que $p_V(x^+)=v^+$, $p_W (x^+)= w^+$, de dónde $\Ima p_V= V$, $\Ima p_W=W$, por lo tanto $V,W$ son cocientes irreducibles en el módulo cíclico estandar $Y$, y por el teorema anterior, son isomorfos. 
+\end{proof}
+Se esbozará la construcción de un $U(\mfg)$-módulo cíclico estandar para garantizar la existencia, ésta construcción necesita de la \textbf{subálgebra de Borel} de $\mfg$: \\
+Considere $D_{\lambda}$ un espacio vectorial $1$-dimensional con base el vector de peso máximo $v^+$, se puede dotar a $D_\lambda$ con estructura de $B$-módulo de la siguiente forma:
+$$(t + \sum_{\alpha\succ 0}x_\alpha) v^+ = tv^+= \lambda(t)v^+ $$
+$D_{\lambda}$ es también un $U(B)$-módulo, entonces se puede construir el producto tensorial $$Z(\lambda)= U(\mfg) \otimes_{U(B)} D_\lambda$$
+éste módulo resulta ser cíclico estandar con peso $\lambda$.
+
+\begin{theorem}[Existencia]
+Sea $\lambda \in \mathfrak{t}^*$. Entonces existe un $U(\mfg)$- módulo cíclico estandar irreducible con peso $\lambda$.
+\end{theorem}.
+\begin{proof}
+Considere $Z(\lambda)$ como en la construcción anterior, $Z(\lambda)$ es cíclico estándar con peso $\lambda$, por tanto tiene un único submódulo máximal $Y(\lambda)$, por tanto $V(\lambda)= Z(\lambda) / Y(\lambda)$ es irreducible y cíclico estándar con peso $\lambda$.
+\end{proof}
+\textbf{Representaciones de dimensión finita.}\\
+
+Si $V$ es un $U(\mfg)$ módulo de dimensión finita irreducible, $V$ tiene al menos un vector de peso máximo con peso $\lambda$, el submódulo generado por éste vector de peso máximo al ser $V$ irreducible debe ser todo $V$, por lo tanto $V$ es isomorfo a $V(\lambda)$. Para cada raíz simple  $\alpha_i$, Sea $S_i$ la copia correspondiente de $\mathfrak{sl}_2$ en $\mfg$. $V(\lambda)$ es también  un módulo sobre $\mathfrak{sl_2}$ de dimensión finita, y un vector de peso máximo para $U(\mfg)$ es también un vector de peso máximo para $S_i$. Como existe un vector de peso máximo de  peso $\lambda$, el peso para la subálgebra de Cartan $\mathfrak{t}_i \subset S_i$ está determinado por el escalar $\lambda(t_i)$, $t_i=t_{\alpha_i}$ (recuerde que $t_{\alpha_i}$ es el único elemento tal que $\alpha(t)= \kappa (t_{\alpha_i},t)$ para todo $t\in \mathfrak{t}$), de la caracterización de las representaciones de $\mathfrak{sl}_2$, $\lambda(h_i)$ es un entero no negativo, por tanto se obtiene el siguiente teorema.
+\begin{theorem}
+Si $V$ es un $U(\mfg)$-módulo irreducible de dimensión finita con peso máximo $\lambda$, entonces $\lambda(h_i)$ es un entero no negativo para todo $i$.
+\end{theorem}
+Un peso $\lambda$ para el cual  $\lambda(t_i)$ es entero para todo $t_i$ (esto implica también para todo $t_{\alpha}$) se le denomina un peso \textbf{entero}. Si $\lambda(t_i)$ son enteros no negativos, a $\lambda$ se le denomina un  peso \textbf{entero dominante}. Denote por $\Lambda$ al conjunto de pesos enteros, éste conjunto forma un latice en $\mathfrak{t}^*$, el conjunto de pesos enteros dominantes se denotará por $\Lambda^+$.\\
+Si $V$ es un  $U(\mfg)$-módulo, sea $\Pi(V)$ el conjunto de todos sus pesos, si $V=V(\lambda)$ es un módulo cíclico estándar, se denota por $\Pi (\lambda)$. \\
+
+El siguiente teorema brinda una condición suficiente para que un $U(\mfg)$-módulo sea de dimensión finita y su corolario brinda una correspondencia entre pesos dominantes y módulos irreducibles de dimensión finta
+\begin{theorem}
+Si $\lambda \in \mathfrak{t}^*$ es un peso entero dominante, entonces el $U(\mfg)$-módulo irreducible $V=V(\lambda)$ tiene dimensión finita, y su conjunto de pesos $\Pi (\lambda)$ es permutado por el grupo de Weyl $\mathcal{W}$, con $\dim V_{\mu}=\dim V_{\sigma \mu}$ para $\sigma \in \mathcal{W}$.
+\end{theorem}
+\begin{corolary}
+La aplicación $\lambda\rightarrow V(\lambda)$ induce una correspondencia uno a uno entre $\Lambda^+$ (pesos enteros dominantes) y clases de isomorfismo de $U(\mfg)$-módulos irreducibles de dimensión finita.
+\end{corolary}
+\textbf{Teoría abstracta de pesos}.\\
+
+Ahora se presenta la teoría abstracta de pesos, para ello considere $\Phi$ un sistema de raíces en un espacio euclídeo $E$ con grupo de Weyl $\mathcal{W}$.   Para $\alpha, \beta \in  E$ denote por $\left \langle  \alpha, \beta\right \rangle= \displaystyle \dfrac{2(\alpha, \beta)}{(\beta, \beta)} $ y defina al conjunto de pesos  como 
+$$\Lambda= \{ \lambda \in E \suchthat \left\langle \lambda, \alpha \right \rangle \in \mathbb{Z}, \alpha \in \Phi\}$$
+Note que por los axiomas establecidos para un sistema de raíces $\Lambda\neq \emptyset$, a los elementos de $\Lambda$ se les denomina \textbf{pesos}, se puede verificar que $\Lambda$ es un subgrupo del espacio euclideo $E$. \\
+Denote por $\Lambda_r$ al subgrupo de $\Lambda$  generado por $\Phi$, a $\Lambda_r$ se le denomia el \textbf{retículo de raíces }, el cual es un retículo al ser el generado sobre $\mathbb{Z}$ por una $\mathbb{R}$-base de $E$.\\
+
+Fije una base $\Delta \subset \Phi$ para el sistema de raíces, se dice que un peso $\lambda \in  \Lambda$ es \textbf{dominante} si todos los enteros $\left\langle \lambda, \alpha \right\rangle$ son no negativos para cada $\alpha \in \Delta$, denote al conjunto de pesos dominantes por $\Delta^+$. \\
+Sea $\Delta= \{\alpha_1, \alpha_2, \cdots, \alpha_l \}$ los elementos $\dfrac{2\alpha_i}{(\alpha_i, \alpha_i)}$ forman también una base para $E$, denote por $\lambda_1,\lambda_2, \cdots, \lambda_l$ la base dual de $\Delta$ con respecto  al producto interior en $E$, es decir:
+$$\dfrac{2(\lambda_i,\alpha_j)}{(\alpha_j, \alpha_j)}= \delta_{ij} $$
+donde $\delta_{ij}=\left\{ \begin{array}{lcc}
+             1 &   si  & i= j \\
+             \\ 0 &  si & i\neq j \\
+             \end{array}
+   \right.$.
+   De ésta forma $\left\langle \lambda_i, \alpha \right\rangle$  es un entero no negativo para todo $i$ y para todo $\alpha \in \Delta$, entonces $\lambda_1, \lambda_2, \cdots, \lambda_l$ son pesos dominantes, a los cuales se les denomina \textbf{pesos dominantes fundamentales} (relativos a $\Delta$), si $\lambda_j \in \Delta^+$ y $\sigma_{\alpha_i} \in \mathcal{W}$, se tiene que \\
+   $$\sigma_{\alpha_i}(\lambda_j)= \lambda_j - \dfrac{2(\lambda_j, \alpha_i)}{(\alpha_i, \alpha_i)}\alpha_i= \lambda_j - \delta_{ij} \alpha_i$$.
+   Sea $\lambda\in E$, denote por $m_i= \left \langle  \lambda, \alpha_i \right \rangle$, entonces se tiene para cada $\alpha\in \Delta$
+   $$0 = \left \langle \lambda- \sum_{i}m_i \lambda_i, \alpha \right\rangle$$
+   de donde $(\lambda-\sum_{i}m_i \lambda_i, \alpha)=0$ es decir $\lambda= \sum_{i}m_i \lambda_i, \alpha$, por tanto $\Lambda$ es un retículo con base $\{\lambda_i \suchthat 1\leq i \leq l\}$ y $\lambda \in \Delta^+$ si y solo si $m_i \geq 0$ para todo $i$.\\
+   
+   A continuación se presenta un los pesos fundamentales para un sistema de raíces de dimensión 2 y luego se presenta una tabla con los pesos fundamentales  $\lambda_i$ en términos de las raíces simples $\alpha_i$ para los sistemas de tipo $A,B,C,D$. Para ilustrarlo, cabe notar que la matriz de Cartan  es la matriz de cambio de base entre las bases $\Delta$ y $\{\lambda_j\}$
+   \begin{example}
+   Considere el sistema de raíces $A_2$, cuya matriz de Cartan es 
+   $$\begin{pmatrix}2 & -1 \\
+   -1 & 2\end{pmatrix} $$
+   Se tiene entonces que $\alpha_1= 2\lambda_1 - \lambda_2$, $\alpha_2= -\lambda_1 +2\lambda_2$, si se quiere determinar a los pesos fundamentales en términos de las raíces se invierte la matriz de Cartan obteniendo la matriz 
+   $$\dfrac{1}{3} \begin{pmatrix}2 & 1 \\
+   1 & 2\end{pmatrix}$$
+   de donde $\lambda_1 = \frac{1}3[2\alpha_1 + \alpha_2]$, $\lambda_2 = \frac{1}3[\alpha_1 + 2\alpha_2]$
+   \end{example}
+   \begin{example}[Pesos fundamentales para sistemas de raíces de dimensión $l$]
+    \end{example}
+    \begin{table}[H]
+\centering
+\begin{tabular}{ll}
+$A_l$: & $\lambda_i=\dfrac{1}{l+1} \left[(l-i+1)\alpha_1 + 2 (l-i+1)\alpha_2 + \cdots (i-1) (l-i+1)\alpha_{i-1} \right.$\\
+ &  \, \, \, $\left. + i (l-i+1)\alpha_i + i (l-i) \alpha_{i+1} + \cdots + i \alpha_l\right]$ \\
+ & \\
+  $B_l$     &    $\lambda_i=\alpha_1 + 2\alpha_2 + \cdots (i-1)\alpha_{i-1}+ i (\alpha_i + \alpha_{i+1}+ \cdots + \alpha
+  _l) $ para $i <l$                  \\
+       & $\lambda_l = \dfrac{1}{2}(\alpha_1+2\alpha_2 + \cdots + l \alpha_l)$                      \\
+       &                     \\
+$C_l$       &  $\lambda_i= \alpha_1 + 2 \alpha_2 + \cdots (i-1)\alpha_{i-1} + i (\alpha_i + \cdots \alpha_{l-1}+\frac{1}{2}\alpha_l) $ \\
+ & \\
+$D_l$ & $\lambda_i= \alpha_1 + 2 \alpha_2 + \cdots (i-1)\alpha_{i-1} + i (\alpha_i + \cdots \alpha_{l-2})+\frac{1}{2}(\alpha_{l-1}+\alpha_l) $ para $i < l-1$. \\
+& $\lambda_{l-1}= \dfrac{1}{2} \left[\alpha_1 + 2 \alpha_2 + \cdots (l-2)\alpha_{l-2} + \dfrac{1}{2}l\alpha_{l-1} +\dfrac{1}{2}(l-2)\alpha_l \right]$\\
+& $\lambda_{l}= \dfrac{1}{2} \left[\alpha_1 + 2 \alpha_2 + \cdots (l-2)\alpha_{l-2} + \dfrac{1}{2}(l-2)\alpha_{l-1} +\dfrac{1}{2}l\alpha_l \right]$
+\end{tabular}
+\end{table}
+
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
